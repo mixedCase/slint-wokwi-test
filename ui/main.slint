@@ -1,0 +1,91 @@
+import { Button, Slider } from "std-widgets.slint";
+
+export MyUI := Window {
+    preferred-width: 320px;
+    preferred-height: 240px;
+
+    property <int> current-screen: 0;
+    property <int> counter;
+    property <string> debug-text-1: "awaiting debug info...";
+    property <string> debug-text-2: "awaiting debug info...";
+
+    callback update-counter(int);
+    callback slider-change <=> my_slider.changed;
+
+    Rectangle {
+        visible: current-screen == 0;
+        background: white;
+        VerticalLayout {
+            Text {
+                text: "Screen 0";
+                color: black;
+                vertical-alignment: center;
+                horizontal-alignment: center;
+            }
+        }
+        TouchArea {
+            clicked => {
+                current-screen = 1;
+            }
+        }
+    }
+    Rectangle {
+        visible: current-screen == 1;
+        background: white;
+        // VerticalLayout {
+        //     Text {
+        //         text: "Screen 1";
+        //         color: black;
+        //         vertical-alignment: center;
+        //         horizontal-alignment: center;
+        //     }
+        // }
+        // TouchArea {
+        //     clicked => {
+        //         current-screen = 0;
+        //     }
+        // }
+    }
+
+    // Overlays
+    HorizontalLayout {
+        width: 58px;
+        height: 48px;
+        Text {
+            text: counter;
+            font-size: 24px;
+        }
+        VerticalLayout {
+            Button {
+                text: "+";
+                clicked => { update-counter(counter + 1); }
+            }
+            Button {
+                text: "-";
+                clicked => { update-counter(counter - 1); }
+            }
+        }
+    }
+    Rectangle {
+        VerticalLayout {
+            alignment: end;
+            Text {
+                text: "Slider:";
+                font_size: 8px;
+            }
+            my-slider := Slider {
+                width: 100%;
+                height: 16px;
+                value: 26.0;
+                minimum: 10;
+                maximum: 100;
+            }
+            Text {
+                text: debug-text-2;
+            }
+            Text {
+                text: debug-text-1;
+            }
+        }
+    }
+}

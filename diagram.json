@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "author": "Andrés Rodríguez",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-c3-devkitm-1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": { "builder": "rust-std-esp32c3" }
+    },
+    {
+      "type": "board-ili9341-cap-touch",
+      "id": "lcd1",
+      "top": -377.72,
+      "left": -40.2,
+      "rotate": 90,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "lcd1:VCC", "esp:5V.2", "red", [ "h-67.86", "v315.35" ] ],
+    [ "lcd1:GND", "esp:GND.5", "black", [ "h-76.46", "v315.35" ] ],
+    [ "lcd1:CS", "esp:8", "blue", [ "h-60.7", "v137.85", "h326.3", "v81.5" ] ],
+    [ "lcd1:RST", "esp:9", "orange", [ "h-55.68", "v121.8", "h312.68", "v78.35" ] ],
+    [ "lcd1:D/C", "esp:3", "purple", [ "h-47.08", "v190.55" ] ],
+    [ "lcd1:MOSI", "esp:7", "gray", [ "h-39.92", "v96.87", "h312.36", "v112.87" ] ],
+    [ "esp:6", "lcd1:SCK", "magenta", [ "h74.25", "v-130.36", "h-314", "v-79.38" ] ],
+    [ "lcd1:MISO", "esp:2", "green", [ "h-22.73", "v142.54" ] ]
+  ],
+  "serialMonitor": { "display": "terminal" }
+}
